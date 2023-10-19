@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>A Test file</title>
+<script>
+	function handleSubmit(event) {
+			alert("in function");
+			let xhr = new XMLHttpRequest();
+			xhr.open("POST", "http://localhost:8080/ExpensePartyRegister");
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4) {
+					console.log(xhr.status);
+					console.log(xhr.responseText);
+				}
+			};
+
+			let name = document.querySelector('#name');
+			alert("name "+name.value);
+			let email = document.querySelector('#email');
+			alert("email "+email.value);
+			let orgn = document.querySelector('#orgn');
+			alert("orgn "+orgn.value);
+			let idType = document.querySelector('#idType');
+			alert("idType "+idType.value);
+			let memDate = document.querySelector('#memDate');
+			alert("memDate "+memDate.value);
+
+			let data = JSON.stringify({"name": name.value, "email": email.value, "organisation": orgn.value, "identityType": idType.value, "memorableDate": memDate.value});
+			alert("data "+data);
+			xhr.send(data);
+			alert("Success")
+		}
+</script>
+</head>
+<body>
+<h2>Expense Party Registration</h2>
+<form action="http://localhost:8080/ExpensePartyRegister" method="post">
+<table>
+	<tr>
+		<td>
+			<label for="name">Name</label>
+		</td>
+		<td>
+			<input id="name" name="name" type="text"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label for="email">Email</label>
+		</td>
+		<td>
+			<input id="email" name="email" type="email"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label for="orgn">Organisation</label>
+		</td>
+		<td>
+			<input id="orgn" name="organisation" type="text"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label for="idType">Identity Type</label>
+		</td>
+		<td>
+			<input id="idType" name="identityType" type="text"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label for="memDate">Memorable Date</label>
+		</td>
+		<td>
+			<input id="memDate" name="memorableDate" type="date"/>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			
+		</td>
+		<td>
+			<button type="button" value="Submit" onclick="handleSubmit()">Submit</button>
+		</td>
+	</tr>
+	<p class="result"></p>
+</table>
+</form>
+</body>
